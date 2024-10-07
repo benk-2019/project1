@@ -1,0 +1,9 @@
+select{
+    width: 125px;
+}
+form{
+    display:inline-block;
+}
+input{
+    width:125px;
+}

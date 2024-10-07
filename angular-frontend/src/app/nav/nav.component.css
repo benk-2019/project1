@@ -1,0 +1,23 @@
+nav{
+    margin:10px 0px 0px 0px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(119, 116, 253);
+    padding: 10px 0px 10px 0px;
+}
+
+nav>a{
+    font-size: 20px;
+    margin:0px 20px;
+    display: inline-block;
+    width: 100px;
+    padding: 10px 0px;
+    text-decoration: none;
+    color:rgb(255, 255, 255);
+    background-color: rgb(89, 35, 112);
+    border-radius: 5px;
+}
+
+nav>a:hover{
+    background-color: rgb(149, 42, 165);
+}

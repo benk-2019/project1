@@ -1,0 +1,8 @@
+<main>
+    <div>
+        @for(team of teams; track $index){
+            <app-team [team]="team"
+                      (updateTeamEvent)="updateTeam($index, $event)"></app-team>
+        }
+    </div>
+</main>

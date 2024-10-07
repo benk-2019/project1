@@ -1,0 +1,25 @@
+<main>
+    <form>
+        <label for="coach.id"></label>
+        <input type="number" name="coach.id" id="coach.id" [(ngModel)]="coach.id">
+
+        <label for="coach.firstName"></label>
+        <input type="text" name="coach.firstName" id="coach.firstName" [(ngModel)]="coach.firstName">
+
+        <label for="coach.lastName"></label>
+        <input type="text" name="coach.lastName" id="coach.lastName" [(ngModel)]="coach.lastName">
+
+        <label for="coach.age"></label>
+        <input type="number" name="coach.age" id="coach.age" [(ngModel)]="coach.age">
+
+        <label for="coach.role"></label>
+        <input type="text" name="coach.role" id="coach.role" [(ngModel)]="coach.role">
+
+        <label for="coach.teamName"></label>
+        <input type="text" name="coach.teamName" id="coach.teamName" [(ngModel)]="coach.teamName">
+    </form>
+
+    <button type="button" (click)="updateCoach()">Update</button>
+    <button type="button" (click)="resetCoach()">Reset</button>
+    <button type="button" (click)="deleteCoach()">Delete</button>
+</main>

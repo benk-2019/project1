@@ -1,0 +1,18 @@
+<main>
+    <label for="teamSelected"></label>
+    <select name="teamSelected" (click)="teamList()" id="teamSelected" [(ngModel)]="teamSelected">
+        <option value="" selected="selected">teams...</option>
+        @for(team of teamNames; track $index){
+            <option value={{team}}>{{team}}</option>
+        }
+    </select>
+
+    <div>
+        @for(player of players; track $index){
+            @if(player.teamName === teamSelected){
+                <app-player [player]="player"></app-player>
+            }
+        }
+    </div>
+</main>
+
