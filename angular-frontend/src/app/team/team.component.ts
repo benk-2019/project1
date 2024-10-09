@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Team } from '../models/team';
 import { FormsModule } from '@angular/forms';
+import { TeamCoachPlayer } from '../models/team-coach-player';
 
 @Component({
   selector: 'app-team',
@@ -10,14 +11,14 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './team.component.css'
 })
 export class TeamComponent {
-  @Input() team: Team = new Team(0, '', 0, '', [], ["Jim Coacherson"]);
+  @Input() team: TeamCoachPlayer = new TeamCoachPlayer(0, '', 0, '', [], []);
 
 
   //store intermediate value of team in this variable
   constructor(){
   }
 
-  @Output() updateTeamEvent = new EventEmitter<Team>();
+  @Output() updateTeamEvent = new EventEmitter<TeamCoachPlayer>();
   // @Output() deleteTeamEvent = new EventEmitter<void>();
   // @Output() resetTeamEvent = new EventEmitter<void>();
   updateTeam() : void{

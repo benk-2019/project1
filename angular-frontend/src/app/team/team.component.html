@@ -10,25 +10,23 @@
         <input type="number" name="team.numPlayers" id="team.numPlayers" [(ngModel)]="team.numPlayers">
 
         <label for="team.headCoach"></label>
-        <input type="number" name="team.headCoach" id="team.headCoach" [(ngModel)]="team.headCoach">
+        <input type="text" name="team.headCoach" id="team.headCoach" [(ngModel)]="team.headCoach">
 
-        <!-- <label for="coaches"></label>
-        <select name="coaches" id="coaches">
-            <option value="" selected="selected">Coaches...</option>
-            @for(coach of team.coaches; track $index){
-                <option value="coach">{{coach}}</option>
-
+        <label for="team.players"></label>
+        <select name="team.players" id="team.players">
+            <option value="" selected="selected">Players...</option>
+            @for(player of team.players; track $index){
+                <option value="player.firstName + ' ' + player.lastName">{{player.firstName}} {{player.lastName}}</option>
             }
         </select>
 
-        <label for="players"></label>
-        <select name="players" id="players">
-            <option value="" selected="selected">Players...</option>
-            @for(player of team.players; track $index){
-                <option value="player">{{player}}</option>
-
+        <label for="team.coaches"></label>
+        <select name="team.coaches" id="team.coaches">
+            <option value="" selected="selected">Coaches...</option>
+            @for(coach of team.coaches; track $index){
+                <option value="coach.firstName+ ' ' + coach.lastName">{{coach.firstName}} {{coach.lastName}}</option>
             }
-        </select> -->
+        </select>
     </form>
 
     <button type="button" (click)="updateTeam()">Update</button>
