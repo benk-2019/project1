@@ -4,6 +4,8 @@ import { TeamComponent } from '../team/team.component';
 import { HttpService } from '../services/http.service';
 import { TeamCoachPlayer } from '../models/team-coach-player';
 import { RouterLink } from '@angular/router';
+import { TeamListService } from '../services/team-list.service';
+import { TeamSimple } from '../models/team-simple';
 
 @Component({
   selector: 'app-teams',
@@ -18,11 +20,12 @@ export class TeamsComponent {
   //   new Team(2, 'Badgers', 0, '', [],[]),
   //   new Team(3, 'Bulldogs', 0, '', [],[])
   // ]
-  constructor(private httpService: HttpService){
+  constructor(private httpService: HttpService, private teamListService:TeamListService){
     this.getAllTeams();
   }
 
   teams: TeamCoachPlayer[] = [];
+  teamList: TeamSimple[] = [];
 
   getAllTeams(){
     this.httpService.getAllTeams().subscribe(data=>{
@@ -30,10 +33,26 @@ export class TeamsComponent {
       temp_team = (data.body)?data.body:[];
       this.teams = temp_team;
       console.log(this.teams);
+      this.setTeamList();
     })
   };
 
   updateTeam(index:number, team:TeamCoachPlayer){
-    this.teams[index] = team;
+    this.httpService.updateTeam(team).subscribe(data=>{
+      console.log(data);
+    });
+    // this.getAllTeams();
+    console.log(this.teams);
+  };
+
+  setTeamList(){
+    let temp_tList: TeamSimple[] = []
+    for(let team of this.teams){
+      if(temp_tList.indexOf({id:team.id,teamName:team.teamName}) === -1){
+        temp_tList.push({id:team.id,teamName:team.teamName});
+      }
+    }
+    console.log(temp_tList);
+    this.teamListService.setTeamList(temp_tList);
   }
 }

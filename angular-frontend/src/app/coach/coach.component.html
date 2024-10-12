@@ -13,10 +13,13 @@
         <input type="number" name="coach.age" id="coach.age" [(ngModel)]="coach.age">
 
         <label for="coach.role"></label>
-        <input type="text" name="coach.role" id="coach.role" [(ngModel)]="coach.role">
+        <select name="coach.role" id="coach.role" [(ngModel)]="coach.role">
+            <option value="" selected="selected">roles...</option>
+            <option value="Head">Head</option>
+            <option value="Assistant">Assistant</option>
+        </select>
 
-        <label for="coach.teamName"></label>
-        <input type="text" name="coach.teamName" id="coach.teamName" [(ngModel)]="coach.teamName">
+        <p>{{coach.teamname}}</p>
     </form>
 
     <button type="button" (click)="updateCoach()">Update</button>

@@ -28,6 +28,8 @@ export class NewTeamComponent {
   }
 
   getUnassignedCoaches(){
-
+    this.httpService.getUnassingedPlayers().subscribe(data=>{
+      this.unassignedPlayers = (data.body)?data.body:[];
+    })
   }
 }

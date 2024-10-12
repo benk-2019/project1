@@ -5,3 +5,19 @@ input{
 form{
     display: inline-block;
 }
+
+select{
+    width:108px;
+    height:22px;
+}
+
+p{
+    padding:0px;
+    margin:0px;
+    height:20px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 15px;
+    display: inline-block;
+    width: 108px;
+}

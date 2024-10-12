@@ -9,10 +9,12 @@
 
     <div>
         @for(player of players; track $index){
-            @if(player.teamName === teamSelected){
-                <app-player [player]="player"></app-player>
+            @if(player.teamname === teamSelected){
+                <app-player [player]="player"
+                            (updatePlayerEvent)="updatePlayer($index, $event)"></app-player>
             }
         }
     </div>
+    <a routerLink="new_player"> Add Player </a>
 </main>
 
