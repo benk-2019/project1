@@ -17,6 +17,13 @@ router.get('/', async (req, res)=>{
     res.status(200).send(result);
 });
 
+router.get('/:id', async (req, res)=>{
+    // const result = await teamRepo.createQueryBuilder("team").innerJoinAndSelect("team.coaches", "coach").select("team.*, coach.id as coach_id, (coach.firstName || ' ' || coach.lastName) as coach_names").execute();
+    const result = await teamRepo.find({relations:['coaches', 'players'], relationLoadStrategy:"join", where:{id:parseInt(req.params.id)}});
+    console.log(result[0]);
+    res.status(200).send(result[0]);
+});
+
 router.delete('/', async (req, res) =>{
     await teamRepo.createQueryBuilder().delete().from(Team).where("id= :id", {id:req.body.id}).execute()
     res.status(200).send({message:"Delete Success"});

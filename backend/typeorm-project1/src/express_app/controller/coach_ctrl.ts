@@ -44,12 +44,16 @@ router.post('/', async (req,res)=>{
 
 router.put('/', async (req, res) =>{
     let diff_coach: Coach = new Coach();
+    diff_coach.id = req.body.id;
     diff_coach.age = req.body.age;
     diff_coach.firstName = req.body.firstName;
     diff_coach.lastName = req.body.lastName;
     diff_coach.role = req.body.role;
     if(req.body.teamId !== 0){
         diff_coach.team = await teamRepo.findOneBy({id:req.body.teamId});
+    }
+    else{
+        diff_coach.team = null;
     }
     await coachRepo.save(diff_coach);
     res.status(200).send({message:"Update Success"});

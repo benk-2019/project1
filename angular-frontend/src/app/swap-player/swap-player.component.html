@@ -1,1 +1,68 @@
-<p>swap-player works!</p>
+<main>
+    <article>
+        <section class="left">
+            <p>Current Team: {{player.teamname}}</p>
+            <form>
+                <label for="oldTeam.players"></label>
+                <select name="oldTeam.players" id="oldTeam.players">
+                    <option value="">Players...</option>
+                    @for(player of oldTeam.players; track $index){
+                        <option value="{{player.firstName}} {{player.lastName}}">{{player.firstName}} {{player.lastName}}</option>
+                    }
+                </select>
+
+                <label for="oldTeam.coaches"></label>
+                <select name="oldTeam.coaches" id="oldTeam.coaches">
+                    <option value="">Coaches...</option>
+                    @for(coach of oldTeam.coaches; track $index){
+                        <option value="{{coach.firstName}} {{coach.lastName}}">{{coach.firstName}} {{coach.lastName}}</option>
+                    }
+                </select>
+            </form>
+            <p>Player to Transfer: </p>
+            <p>Name: {{player.firstName}} {{player.lastName}}</p>
+            <p>Age: {{player.age}}</p>
+            <p>Position: {{player.position}}</p>
+        </section>
+
+
+        <section class="right">
+            <form class="ah">
+                <label for="selectedTeam.teamName">New Team: </label>
+                <select name="selectedTeam.teamName" id="selectedTeam.teamName" [(ngModel)]="selectedTeam.teamName" (change)="getNewTeam()">
+                    <option value="" selected="selected">Teams...</option>
+                    @for(team of teamList; track $index){
+                        @if(team.teamName !== oldTeam.teamName){
+                            <option value="{{team.teamName}}">{{team.teamName}}</option>
+                        }
+                    }
+                </select>
+            </form>
+
+            <form>
+                <label for="newTeam.players"></label>
+                <select name="newTeam.players" id="newTeam.players">
+                    <option value="">Players...</option>
+                    @for(player of newTeam.players; track $index){
+                        <option value="{{player.firstName}} {{player.lastName}}">{{player.firstName}} {{player.lastName}}</option>
+                    }
+                </select>
+        
+                <label for="newTeam.coaches"></label>
+                <select name="newTeam.coaches" id="newTeam.coaches">
+                    <option value="">Coaches...</option>
+                    @for(coach of newTeam.coaches; track $index){
+                        <option value="{{coach.firstName}} {{coach.lastName}}">{{coach.firstName}} {{coach.lastName}}</option>
+                    }
+                </select>
+
+                <p>Player Post Transfer: </p>
+                <p>Name: {{player.firstName}} {{player.lastName}}</p>
+                <p>Age: {{player.age}}</p>
+                <p>Position: {{player.position}}</p>
+            </form>
+        </section>
+    </article>
+
+    <button (click)="changeTeam()">Confirm Transfer</button>
+</main>

@@ -1,0 +1,33 @@
+article{
+    display:flex;
+    justify-content: space-between;
+}
+
+.left, .right{
+    display: inline-block;
+    border-style: solid;
+    width: 40%;
+    height:300px;
+}
+
+.left{
+    background-color: rgb(159, 194, 224);
+}
+
+.right{
+    background-color: rgb(200, 131, 131);
+    justify-content: right;
+}
+
+.right>.ah{
+    
+    margin: 1em 0em;
+}
+
+button{
+    position: relative;
+    top: 55%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

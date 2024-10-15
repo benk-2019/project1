@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 import { Team } from '../models/team';
 import { TeamSimple } from '../models/team-simple';
+import { TeamListService } from '../services/team-list.service';
+import { Router } from '@angular/router';
+import { PlayerService } from '../services/player.service';
 
 @Component({
   selector: 'app-player',
@@ -15,7 +18,13 @@ import { TeamSimple } from '../models/team-simple';
 export class PlayerComponent {
   @Input() player: Player = new Player(0, '', '', 0, '',0, '');
 
-  @Input() teamList: TeamSimple[] = [];
+  teamList: TeamSimple[] = [];
+
+  constructor(private teamListService:TeamListService, private route:Router, private playerService: PlayerService){
+    this.teamListService.teamList.subscribe(data=>{
+      this.teamList = data;
+    })
+  }
 
   @Output() updatePlayerEvent = new EventEmitter<Player>();
   @Output() deletePlayerEvent = new EventEmitter<void>();
@@ -31,5 +40,10 @@ export class PlayerComponent {
 
   resetPlayer(): void{
     this.resetPlayerEvent.emit();
+  }
+
+  transferPlayer(){
+    this.playerService.setplayer_s(this.player);
+    this.route.navigate(['players/transfer_player']);
   }
 }

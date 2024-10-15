@@ -23,6 +23,7 @@ export class PlayersComponent {
 
   constructor(private httpService: HttpService, private teamListService: TeamListService){
     this.getAllPlayers();
+    console.log("In Players Constructor!!!");
     this.teamListService.teamList.subscribe(data=>{
       this.teamList = data;
     });
@@ -58,5 +59,7 @@ export class PlayersComponent {
     this.players = temp_players;
   }
 
-  resetPlayer(){}
+  resetPlayer(){
+    this.getAllPlayers();
+  }
 }

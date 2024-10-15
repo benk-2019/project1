@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Team } from '../models/team';
@@ -19,8 +19,11 @@ export class HttpService {
     return this.http.get<TeamCoachPlayer[]>(this.baseURL + '/teams', {observe: "response"});
   }
 
+  getTeamById(id:number): Observable<HttpResponse<TeamCoachPlayer>>{
+    return this.http.get<TeamCoachPlayer>(this.baseURL + `/teams/${id}`, {observe:'response'});
+  }
+
   updateTeam(diff_team:TeamCoachPlayer): Observable<HttpResponse<String>>{
-    console.log("Here")
     return this.http.put<HttpResponse<String>>(this.baseURL + '/teams', {
       id: diff_team.id,
       teamName: diff_team.teamName,
@@ -41,6 +44,8 @@ export class HttpService {
     })
   }
 
+
+
   getAllPlayers(): Observable<HttpResponse<Player[]>>{
     return this.http.get<Player[]>(this.baseURL + '/players', {observe: "response"})
   }
@@ -50,6 +55,7 @@ export class HttpService {
   }
 
   updatePlayer(diff_player:Player): Observable<HttpResponse<String>>{
+    console.log(diff_player.teamId);
     return this.http.put<HttpResponse<String>>(this.baseURL + '/players', {
       id:diff_player.id,
       firstName:diff_player.firstName, 

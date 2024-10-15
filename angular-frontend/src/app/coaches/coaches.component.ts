@@ -42,6 +42,9 @@ export class CoachesComponent {
 
   updateCoach(coach_change: Coach, index: number){
     this.coaches[index] = coach_change;
+    this.httpService.updateCoach(coach_change).subscribe(data=>{
+      console.log(data);
+    })
   }
 
   deleteCoach(id: number, index: number){

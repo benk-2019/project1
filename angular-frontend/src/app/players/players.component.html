@@ -11,7 +11,6 @@
         @for(player of players; track $index){
             @if(player.teamname === teamSelected){
                 <app-player [player]="player"
-                            [teamList]="teamList"
                             (updatePlayerEvent)="updatePlayer($index, $event)"
                             (deletePlayerEvent)="deletePlayer($index)"
                             (resetPlayerEvent)="resetPlayer()"></app-player>

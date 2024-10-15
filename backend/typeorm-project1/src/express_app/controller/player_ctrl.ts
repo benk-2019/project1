@@ -41,10 +41,11 @@ router.get('/unassigned', async (req, res)=>{
 });
 
 router.put('/', async (req, res) =>{
-    let flag = false;
+    const result1 = await playerRepo.createQueryBuilder('player').leftJoinAndSelect('player.team', 'team').
+    select("player.*, CASE WHEN team.teamName IS NULL THEN '' ELSE team.teamName END as teamName").where(`player.id = ${req.body.id}`).execute();
+    let result = (result1[0])?result1[0]:{teamId:null};
     let diff_player: Player = new Player();
-    const result = await playerRepo.createQueryBuilder('player').leftJoinAndSelect('player.team', 'team').
-    select("player.*, CASE WHEN team.teamName IS NULL THEN '' ELSE team.teamName END as teamName").execute();
+    diff_player.id = req.body.id;
     diff_player.age = req.body.age;
     diff_player.firstName = req.body.firstName;
     diff_player.lastName = req.body.lastName;
@@ -52,10 +53,20 @@ router.put('/', async (req, res) =>{
     if(req.body.teamId !== 0){
         diff_player.team = await teamRepo.findOneBy({id:req.body.teamId});
         if(result.teamId !== req.body.teamId){
-            let old_team = await teamRepo.findOneBy({id:req.body.teamId});
-            old_team.numPlayers = old_team.numPlayers - 1;
+            if(result.teamId !== null){
+                let old_team = await teamRepo.findOneBy({id:result.teamId});
+                old_team.numPlayers = old_team.numPlayers - 1;
+                await teamRepo.save(old_team);
+            }
             diff_player.team.numPlayers = (diff_player.team.numPlayers)?(diff_player.team.numPlayers + 1):1;
             await teamRepo.save(diff_player.team);
+        }
+    }
+    else{
+        diff_player.team = null;
+        if(result.teamId!==null){
+            let old_team = await teamRepo.findOneBy({id:result.teamId});
+            old_team.numPlayers = old_team.numPlayers - 1;
             await teamRepo.save(old_team);
         }
     }

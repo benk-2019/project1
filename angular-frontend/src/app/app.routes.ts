@@ -5,6 +5,8 @@ import { CoachesComponent } from './coaches/coaches.component';
 import { NewTeamComponent } from './new-team/new-team.component';
 import { NewPlayerComponent } from './new-player/new-player.component';
 import { NewCoachComponent } from './new-coach/new-coach.component';
+import { SwapPlayerComponent } from './swap-player/swap-player.component';
+import { SwapCoachComponent } from './swap-coach/swap-coach.component';
 
 export const routes: Routes = [
     {
@@ -30,5 +32,13 @@ export const routes: Routes = [
     {
         path:"coaches/new_coach",
         component: NewCoachComponent
+    },
+    {
+        path:"players/transfer_player",
+        component: SwapPlayerComponent
+    },
+    {
+        path:"coaches/transfer_coach",
+        component: SwapCoachComponent
     }
 ];
