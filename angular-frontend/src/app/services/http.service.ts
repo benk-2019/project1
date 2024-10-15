@@ -20,14 +20,25 @@ export class HttpService {
   }
 
   updateTeam(diff_team:TeamCoachPlayer): Observable<HttpResponse<String>>{
+    console.log("Here")
     return this.http.put<HttpResponse<String>>(this.baseURL + '/teams', {
-      id:diff_team.id,
-      teamName:diff_team.teamName,
-      numPlayers:diff_team.numPlayers,
-      headCoach:diff_team.headCoach,
-      players:diff_team.players,
-      coaches:diff_team.coaches
+      id: diff_team.id,
+      teamName: diff_team.teamName,
+      numPlayers: diff_team.numPlayers,
+      headCoach: diff_team.headCoach,
+      players: diff_team.players,
+      coaches: diff_team.coaches
     });
+  }
+
+  createTeam(new_team:TeamCoachPlayer): Observable<HttpResponse<String>>{
+    return this.http.post<HttpResponse<String>>(this.baseURL + '/teams', {
+      teamName: new_team.teamName,
+      headCoach: new_team.headCoach,
+      numPlayers: new_team.numPlayers,
+      players: new_team.players,
+      coaches: new_team.coaches
+    })
   }
 
   getAllPlayers(): Observable<HttpResponse<Player[]>>{
@@ -49,8 +60,40 @@ export class HttpService {
     });
   }
 
+  createPlayer(new_player:Player): Observable<HttpResponse<String>>{
+    return this.http.post<HttpResponse<String>>(this.baseURL + '/players', {
+      firstName:new_player.firstName,
+      lastName:new_player.lastName,
+      age:new_player.age,
+      position:new_player.position,
+      teamId:new_player.teamId
+    });
+  }
+
+  deletePlayer(id:number): Observable<HttpResponse<String>>{
+    return this.http.delete<HttpResponse<String>>(this.baseURL + '/players', {body:{id:id}});
+  }
+
+
+
+
   getAllCoaches(): Observable<HttpResponse<Coach[]>>{
     return this.http.get<Coach[]>(this.baseURL + '/coaches', {observe:"response"});
+  }
+
+  getUnassingedCoaches(): Observable<HttpResponse<Coach[]>>{
+    return this.http.get<Coach[]>(this.baseURL + '/coaches/unassigned', {observe:"response"});
+  }
+
+  updateCoach(diff_coach:Coach): Observable<HttpResponse<String>>{
+    return this.http.put<HttpResponse<String>>(this.baseURL + '/coaches', {
+      id:diff_coach.id,
+      firstName:diff_coach.firstName,
+      lastName: diff_coach.lastName,
+      age:diff_coach.age,
+      role:diff_coach.role,
+      teamId:diff_coach.teamId
+    });
   }
 
   createCoach(new_coach:Coach): Observable<HttpResponse<String>>{

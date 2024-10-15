@@ -1,9 +1,58 @@
 <Main>
     <Form>
-        <label for="team.teamName"> Team Name </label>
+        <label for="team.teamName">Team Name: </label>
         <input type="text" name="team.teamName" id="team.teamName" [(ngModel)]="team.teamName">
 
-        <p>{{team.numPlayers}}</p>
+        <label for="team.headCoach">Head Coach: </label>
+        <select name="team.headCoach" id="team.headCoach" [(ngModel)]="team.headCoach">
+            <option value="{{team.headCoach}}">{{team.headCoach}}</option>
+            @for(coach of team.coaches; track $index){
+                <option value="{{coach.firstName}} {{coach.lastName}}">{{coach.firstName}} {{coach.lastName}}</option>
+            }
+        </select>
 
+        <p>Number of Players: {{team.numPlayers}}</p>
+        <div class="top">
+            <div class="left">
+                <p>Assigned Coaches:</p>
+                <!-- Child(ren) component(s) storing all chosen coaches(per coach) w/ rm button -->
+                @for(coach of team.coaches; track $index){
+                    <app-rm-coach [coach]="coach"
+                                (rmCoachEvent)="rmCoach($index)"></app-rm-coach>
+                }
+            </div>
+
+            <div class="right">
+                <p>Unassigned Coaches:</p>
+                <!-- Child(ren) component(s) storing all unchosen coaches(per coach) w/ add button -->
+                @for(coach of unassignedCoaches; track $index){
+                    <app-add-coach [coach]="coach"
+                                (addCoachEvent)="addCoach($index)"></app-add-coach>
+                }
+            </div>
+        </div>
+
+        <div class="bottom">
+            <div class="left">
+                <p>Assigned Players:</p>
+                <!-- Child(ren) component(s) storing all chosen players(per player) w/ rm button -->
+                @for(player of team.players; track $index){
+                    <app-rm-player [player]="player"
+                                (rmPlayerEvent)="rmPlayer($index)"></app-rm-player>
+                }
+            </div>
+
+            <!-- **Want above on left of page, want below on right** -->
+
+            <div class="right">
+                <p>Unassigned Players:</p>
+                <!-- Child(ren) component(s) storing all unchosen players(per player) w/ add button -->
+                @for(player of unassignedPlayers; track $index){
+                    <app-add-player [player]="player"
+                                (addPlayerEvent)="addPlayer($index)"></app-add-player>
+                }
+            </div>
+        </div>
     </Form>
+    <button type="button" (click)="createTeam()">Create</button>
 </Main>

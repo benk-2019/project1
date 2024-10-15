@@ -9,14 +9,20 @@
         <label for="team.numPlayers"></label>
         <input type="number" name="team.numPlayers" id="team.numPlayers" [(ngModel)]="team.numPlayers">
 
+
         <label for="team.headCoach"></label>
-        <input type="text" name="team.headCoach" id="team.headCoach" [(ngModel)]="team.headCoach">
+        <select name="team.headCoach" id="team.headCoach" [(ngModel)]="team.headCoach">
+            <option value="{{team.headCoach}}" selected="selected">{{team.headCoach}}</option>
+            @for(coach of team.coaches; track $index){
+                <option value="{{coach.firstName}} {{coach.lastName}}">{{coach.firstName}} {{coach.lastName}}</option>
+            }
+        </select>
 
         <label for="team.players"></label>
         <select name="team.players" id="team.players">
             <option value="" selected="selected">Players...</option>
             @for(player of team.players; track $index){
-                <option value="player.firstName + ' ' + player.lastName">{{player.firstName}} {{player.lastName}}</option>
+                <option value="{{player.firstName}} {{player.lastName}}">{{player.firstName}} {{player.lastName}}</option>
             }
         </select>
 
@@ -24,7 +30,7 @@
         <select name="team.coaches" id="team.coaches">
             <option value="" selected="selected">Coaches...</option>
             @for(coach of team.coaches; track $index){
-                <option value="coach.firstName+ ' ' + coach.lastName">{{coach.firstName}} {{coach.lastName}}</option>
+                <option value="{{coach.firstName}} {{coach.lastName}}">{{coach.firstName}} {{coach.lastName}}</option>
             }
         </select>
     </form>

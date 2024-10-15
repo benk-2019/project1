@@ -2,6 +2,7 @@ import * as express from 'express';
 import { AppDataSource } from '../../data-source';
 import { Coach } from '../../entity/Coach';
 import { Team } from '../../entity/Team';
+import { IsNull } from 'typeorm';
 
 const router = express.Router();
 
@@ -12,6 +13,17 @@ router.get('/', async (req, res)=>{
     const result = await coachRepo.createQueryBuilder('coach').leftJoinAndSelect('coach.team', 'team').
     select("coach.*, CASE WHEN team.teamName IS NULL THEN '' ELSE team.teamName END as teamName").execute();
     // const result = await coachRepo.find({relations:['team'], relationLoadStrategy:"join"});
+    console.log(result);
+    res.status(200).send(result);
+});
+
+router.get('/unassigned', async (req, res)=>{
+    const result: Coach[] = await coachRepo.find({
+        relations:['team'], 
+        loadRelationIds:true, 
+        where:{
+            team: IsNull()
+        }});
     console.log(result);
     res.status(200).send(result);
 });
@@ -37,7 +49,7 @@ router.put('/', async (req, res) =>{
     diff_coach.lastName = req.body.lastName;
     diff_coach.role = req.body.role;
     if(req.body.teamId !== 0){
-        diff_coach.team = await teamRepo.findOneBy({id:req.body.id});
+        diff_coach.team = await teamRepo.findOneBy({id:req.body.teamId});
     }
     await coachRepo.save(diff_coach);
     res.status(200).send({message:"Update Success"});

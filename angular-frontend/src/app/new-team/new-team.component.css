@@ -1,0 +1,30 @@
+input, select{
+    display: block;
+}
+
+.top, .bottom{
+    display: flex;
+    justify-content: space-between;
+}
+
+.left, .right{
+    display: inline-block;
+    border-style: solid;
+    width: 40%;
+    height:150px;
+}
+
+.left{
+    background-color: rgb(159, 194, 224);
+}
+
+.right{
+    background-color: rgb(200, 131, 131);
+}
+
+.right>p, .left>p{
+    text-align: center;
+    font-size: 18px;
+    font-weight: 550;
+    margin:3px 0px 10px 0px;
+}

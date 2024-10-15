@@ -1,12 +1,37 @@
 import { Component } from '@angular/core';
+import { Player } from '../models/player';
+import { TeamListService } from '../services/team-list.service';
+import { TeamSimple } from '../models/team-simple';
+import { HttpService } from '../services/http.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-new-player',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './new-player.component.html',
   styleUrl: './new-player.component.css'
 })
 export class NewPlayerComponent {
+  player: Player = new Player(0,'', '', 0, '', 0, '');
+  teamList: TeamSimple[] = [];
 
+  //probs want subscribe to team list for available list of teams to add player to
+  constructor(private teamListService: TeamListService, private httpService: HttpService){
+    this.teamListService.teamList.subscribe(data=>{
+      this.teamList = data;
+    });
+  }
+
+  createPlayer(){
+    for(let team of this.teamList){
+      if(team.teamName === this.player.teamname){
+        this.player.teamId = team.id;
+        break;
+      }
+    }
+    this.httpService.createPlayer(this.player).subscribe(data=>{
+      console.log(data);
+    })
+  }
 }

@@ -1,9 +1,9 @@
 <main>
     <label for="teamSelected"></label>
-    <select name="teamSelected" (click)="teamList()" id="teamSelected" [(ngModel)]="teamSelected">
-        <option value="" selected="selected">teams...</option>
-        @for(team of teamNames; track $index){
-            <option value={{team}}>{{team}}</option>
+    <select name="teamSelected" id="teamSelected" [(ngModel)]="teamSelected">
+        <option value="" selected="selected">Teams...</option>
+        @for(team of teamList; track $index){
+            <option value={{team.teamName}}>{{team.teamName}}</option>
         }
     </select>
 
@@ -11,7 +11,10 @@
         @for(player of players; track $index){
             @if(player.teamname === teamSelected){
                 <app-player [player]="player"
-                            (updatePlayerEvent)="updatePlayer($index, $event)"></app-player>
+                            [teamList]="teamList"
+                            (updatePlayerEvent)="updatePlayer($index, $event)"
+                            (deletePlayerEvent)="deletePlayer($index)"
+                            (resetPlayerEvent)="resetPlayer()"></app-player>
             }
         }
     </div>

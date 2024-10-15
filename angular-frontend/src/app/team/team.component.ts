@@ -22,18 +22,19 @@ export class TeamComponent {
   // @Output() deleteTeamEvent = new EventEmitter<void>();
   // @Output() resetTeamEvent = new EventEmitter<void>();
   updateTeam() : void{
-    let flag:boolean = false;
+    // let flag:boolean = false;
 
-    for(let coach of this.team.coaches){
-      if(this.team.headCoach === (coach.firstName + " " + coach.lastName)){
-        flag = true;
-        break;
-      }
-    }
+    // for(let coach of this.team.coaches){
+    //   if(this.team.headCoach === (coach.firstName + " " + coach.lastName)){
+    //     flag = true;
+    //     break;
+    //   }
+    // }
 
-    if((flag) || (this.team.headCoach = '')){
-      this.updateTeamEvent.emit(this.team);
-    }
+    // if((flag) || (this.team.headCoach === '')){
+    //   this.updateTeamEvent.emit(this.team);
+    // }
+    this.updateTeamEvent.emit(this.team);
   }
 
   // deleteTeam():void{

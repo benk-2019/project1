@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpService } from '../services/http.service';
 import { TeamCoachPlayer } from '../models/team-coach-player';
 import { RouterLink } from '@angular/router';
+import { TeamSimple } from '../models/team-simple';
+import { TeamListService } from '../services/team-list.service';
 
 @Component({
   selector: 'app-players',
@@ -17,29 +19,22 @@ export class PlayersComponent {
   players: Player[] = [];
 
   teamSelected: string = '';
-  teamNames: string[] = [];
+  teamList: TeamSimple[] = [];
 
-  constructor(private httpService: HttpService){
-    this.getAllTeamsPlayers();
+  constructor(private httpService: HttpService, private teamListService: TeamListService){
+    this.getAllPlayers();
+    this.teamListService.teamList.subscribe(data=>{
+      this.teamList = data;
+    });
   }
 
-  teamList(){
-    let teams: string[] = [];
-    for(let player of this.players){
-      if((teams.indexOf(player.teamname) === -1)){
-        teams.push(player.teamname);
-      }
-    }
-    this.teamNames = teams;
-  };
-
-  getAllTeamsPlayers(){
+  getAllPlayers(){
     this.httpService.getAllPlayers().subscribe(data=>{
       let temp_players: Player[] = [];
       temp_players = (data.body)?data.body:[];
+      console.log(data.body);
       this.players = temp_players;
       console.log(this.players);
-      this.teamList();
     });
   };
 
@@ -48,6 +43,20 @@ export class PlayersComponent {
     this.httpService.updatePlayer(new_player).subscribe(data=>{
       console.log(data);
     });
-    // this.getAllTeamsPlayers();
   };
+
+  deletePlayer(index:number){
+    this.httpService.deletePlayer(this.players[index].id).subscribe(data=>{
+      console.log(data);
+    });
+    let temp_players: Player[] = [];
+    for(let i = 0; i<this.players.length; i++){
+      if(i !== index){
+        temp_players.push(this.players[i]);
+      }
+    }
+    this.players = temp_players;
+  }
+
+  resetPlayer(){}
 }
