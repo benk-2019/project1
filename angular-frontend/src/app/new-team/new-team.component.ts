@@ -9,6 +9,7 @@ import { AddCoachComponent } from '../add-coach/add-coach.component';
 import { AddPlayerComponent } from '../add-player/add-player.component';
 import { RmCoachComponent } from '../rm-coach/rm-coach.component';
 import { RmPlayerComponent } from '../rm-player/rm-player.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-team',
@@ -23,7 +24,7 @@ export class NewTeamComponent {
   unassignedPlayers: Player[] = [];
   unassignedCoaches: Coach[] = [];
 
-  constructor(private httpService: HttpService){
+  constructor(private httpService: HttpService, private router: Router){
     this.getUnassignedPlayers();
     this.getUnassignedCoaches();
   }
@@ -105,6 +106,7 @@ export class NewTeamComponent {
   createTeam(){
     this.httpService.createTeam(this.team).subscribe(data=>{
       console.log(data);
+      this.router.navigate(['/teams']);
     });
   }
 }

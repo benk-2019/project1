@@ -39,7 +39,7 @@ export class CoachComponent {
   }
 
   deleteCoach():void{
-    this.deleteCoachEvent.emit(this.coach.id);
+    this.deleteCoachEvent.emit();
   }
 
   resetCoach():void{//not sure how to do this, will come back later

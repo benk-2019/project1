@@ -1,8 +1,17 @@
 <main>
+    <form>
+        <label for="teamName">Team Name</label>
+        <label for="numPlayers">Num. Players</label>
+        <label for="headCoach">Head Coach</label>
+        <label for="players">Players</label>
+        <label for="coaches">Coaches</label>
+    </form>
     <div>
         @for(team of teams; track $index){
             <app-team [team]="team"
-                      (updateTeamEvent)="updateTeam($index, $event)"></app-team>
+                      (updateTeamEvent)="updateTeam($index, $event)"
+                      (resetTeamEvent)="resetTeam()"
+                      (deleteTeamEvent)="deleteTeam($index)"></app-team>
         }
     </div>
     <a routerLink="new_team"> Add Team </a>

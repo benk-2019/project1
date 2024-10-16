@@ -4,6 +4,7 @@ import { TeamListService } from '../services/team-list.service';
 import { TeamSimple } from '../models/team-simple';
 import { HttpService } from '../services/http.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-player',
@@ -17,7 +18,7 @@ export class NewPlayerComponent {
   teamList: TeamSimple[] = [];
 
   //probs want subscribe to team list for available list of teams to add player to
-  constructor(private teamListService: TeamListService, private httpService: HttpService){
+  constructor(private teamListService: TeamListService, private httpService: HttpService, private router: Router){
     this.teamListService.teamList.subscribe(data=>{
       this.teamList = data;
     });
@@ -32,6 +33,7 @@ export class NewPlayerComponent {
     }
     this.httpService.createPlayer(this.player).subscribe(data=>{
       console.log(data);
+      this.router.navigate(['/players']);
     })
   }
 }

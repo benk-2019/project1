@@ -1,30 +1,43 @@
 <main>
-    <h1>New Coach:</h1>
-    <form>
-        <label for="new_coach.firstName"></label>
-        <input type="text" name="new_coach.firstName" id="new_coach.firstName" [(ngModel)]="new_coach.firstName">
+    <div class="center">Create New Coach:</div>
+    <div class="center1">
+        <form>
+            <label for="new_coach.firstName">First Name:</label>
+            <input type="text" name="new_coach.firstName" id="new_coach.firstName" [(ngModel)]="new_coach.firstName">
 
-        <label for="new_coach.lastName"></label>
-        <input type="text" name="new_coach.lastName" id="new_coach.lastName" [(ngModel)]="new_coach.lastName">
+            <label for="new_coach.lastName">Last Name:</label>
+            <input type="text" name="new_coach.lastName" id="new_coach.lastName" [(ngModel)]="new_coach.lastName">
 
-        <label for="new_coach.age"></label>
-        <input type="text" name="new_coach.age" id="new_coach.age" [(ngModel)]="new_coach.age">
+            <label for="new_coach.age">Age:</label>
+            <input type="text" name="new_coach.age" id="new_coach.age" [(ngModel)]="new_coach.age">
 
-        <label for="new_coach.role"></label>
-        <select name="new_coach.role" id="new_coach.role" [(ngModel)]="new_coach.role">
-            <option value="" selected="selected">roles...</option>
-            <option value="Head">Head</option>
-            <option value="Assistant">Assistant</option>
-        </select>
-
-        <label for="new_coach.teamname"></label>
-        <select name="new_coach.teamname" id="new_coach.teamname" [(ngModel)]="new_coach.teamname">
-            <option value="" selected="selected">teams...</option>
-            @for(team of teamList; track $index){
-                <option value={{team.teamName}}>{{team.teamName}}</option>
+            <label for="new_coach.teamname">Team:</label>
+            <select name="new_coach.teamname" id="new_coach.teamname" (change)="headCheck()" [(ngModel)]="new_coach.teamname">
+                <option value="" selected="selected">teams...</option>
+                @for(team of teamList; track $index){
+                    <option value={{team.teamName}}>{{team.teamName}}</option>
+                }
+            </select>
+            @if(roleSelect){
+                <label for="new_coach.role">Role:</label>
+                <select name="new_coach.role" id="new_coach.role" [(ngModel)]="new_coach.role">
+                    <option value="" selected="selected">roles...</option>
+                    <option value="Head">Head</option>
+                    <option value="Assistant">Assistant</option>
+                </select>
             }
-        </select>
-    </form>
-    {{new_coach.teamname}}   {{new_coach.teamId}}
-    <button (click)="createCoach()">Submit</button>
+            @else{
+                <label for="new_coach.role">Role:</label>
+                @if(new_coach.role){
+                    <p>Head</p>
+                }
+                @else{
+                    <p></p>
+                }
+            }
+        </form>
+    </div>
+    <div class="center2">
+        <button (click)="createCoach()">Submit</button>
+    </div>
 </main>

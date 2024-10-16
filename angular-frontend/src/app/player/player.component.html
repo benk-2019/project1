@@ -1,8 +1,5 @@
 <main>
     <form>
-        <label for="player.id"></label>
-        <input type="number" name="player.id" id="player.id" [(ngModel)]="player.id">
-
         <label for="player.firstName"></label>
         <input type="text" name="player.firstName" id="player.firstName" [(ngModel)]="player.firstName">
 
@@ -14,10 +11,9 @@
 
         <label for="player.position"></label>
         <input type="text" name="player.position" id="player.position" [(ngModel)]="player.position">
-
-        <label for="player.teamname"></label>
-        <input type="textName" name="player.teamname" id="player.teamname" [(ngModel)]="player.teamname">
     </form>
+
+    <span>{{player.teamname}}</span>
    
     <button type="button" (click)="transferPlayer()">Transfer</button>
     <button type="button" (click)="updatePlayer()">Update</button>

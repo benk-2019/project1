@@ -19,8 +19,8 @@ export class TeamComponent {
   }
 
   @Output() updateTeamEvent = new EventEmitter<TeamCoachPlayer>();
-  // @Output() deleteTeamEvent = new EventEmitter<void>();
-  // @Output() resetTeamEvent = new EventEmitter<void>();
+  @Output() deleteTeamEvent = new EventEmitter<void>();
+  @Output() resetTeamEvent = new EventEmitter<void>();
   updateTeam() : void{
     // let flag:boolean = false;
 
@@ -37,11 +37,11 @@ export class TeamComponent {
     this.updateTeamEvent.emit(this.team);
   }
 
-  // deleteTeam():void{
-  //   this.deleteTeamEvent.emit();
-  // }
+  deleteTeam():void{
+    this.deleteTeamEvent.emit();
+  }
 
-  // resetTeam():void{//not sure how to do this, will come back later
-  //   this.resetTeamEvent.emit();
-  // }
+  resetTeam():void{//not sure how to do this, will come back later
+    this.resetTeamEvent.emit();
+  }
 }

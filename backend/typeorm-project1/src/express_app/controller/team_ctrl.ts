@@ -25,14 +25,52 @@ router.get('/:id', async (req, res)=>{
 });
 
 router.delete('/', async (req, res) =>{
-    await teamRepo.createQueryBuilder().delete().from(Team).where("id= :id", {id:req.body.id}).execute()
-    res.status(200).send({message:"Delete Success"});
+    const results = await teamRepo.find({relations:['coaches', 'players'], relationLoadStrategy:"join", where:{id:parseInt(req.body.id)}});
+    
+    //release players/coaches from team first, then delete team
+    let players: Player[] = results[0].players;
+    let coaches: Coach[] = results[0].coaches;
+    for(let player of players){
+        player.team = null;
+        await playerRepo.save(player);
+    }
+    for(let coach of coaches){
+        coach.team = null;
+        await coachRepo.save(coach);
+    }
+
+    await teamRepo.delete({id:req.body.id});
+    res.status(204).send({message:"Delete Success"});
 });
 
 router.put('/', async (req,res)=>{
     let diff_team:Team = new Team();
     diff_team = await teamRepo.findOneBy({id:req.body.id});
-    diff_team.headCoach = req.body.headCoach;
+    if(diff_team.headCoach !== req.body.headCoach){
+        let old_head_name:string[] = diff_team.headCoach.split(" ");
+        const result1 = await coachRepo.find({where:{
+            firstName: old_head_name[0],
+            lastName: old_head_name[1]
+        }});
+        let old_head = result1[0];
+        console.log(old_head_name[0]);
+        let new_head_name:string[] = req.body.headCoach.split(" ");
+        const result2 = await coachRepo.find({where:{
+            firstName: new_head_name[0],
+            lastName: new_head_name[1]
+        }});
+        let new_head = result2[0];
+        console.log(new_head_name[0]);
+        new_head.role = "Head";
+        old_head.role = "Assistant";
+        await coachRepo.save(new_head);
+        await coachRepo.save(old_head);
+        diff_team.headCoach = req.body.headCoach;
+    }
+    else{
+        console.log(diff_team.headCoach);
+    }
+    
     diff_team.numPlayers = req.body.numPlayers;
     diff_team.teamName = req.body.teamName;
     await teamRepo.save(diff_team);

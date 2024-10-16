@@ -1,8 +1,5 @@
 <main>
     <form>
-        <label for="team.id"></label>
-        <input type="number" name="team.id" id="team.id" [(ngModel)]="team.id">
-
         <label for="team.teamName"></label>
         <input type="text" name="team.teamName" id="team.teamName" [(ngModel)]="team.teamName">
 
@@ -36,6 +33,6 @@
     </form>
 
     <button type="button" (click)="updateTeam()">Update</button>
-    <!--<button type="button" (click)="resetCoach()">Reset</button>
-    <button type="button" (click)="deleteCoach()">Delete</button> -->
+    <button type="button" (click)="resetTeam()">Reset</button>
+    <button type="button" (click)="deleteTeam()">Delete</button>
 </main>

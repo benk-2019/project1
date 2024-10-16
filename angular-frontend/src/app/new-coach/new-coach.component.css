@@ -1,0 +1,42 @@
+input{
+    display: block;
+    width: 150px;
+}
+
+select{
+    display: block;
+    width: 158px;
+    height:20px
+}
+
+.center1{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center2{
+    margin-top: 5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center{
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+p{
+    padding:0px;
+    margin:0px;
+    height:20px;
+    border-style: solid;
+    border-width: .25px;
+    font-size: 15px;
+    display: block;
+    width: 158px;
+
+}

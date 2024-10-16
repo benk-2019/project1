@@ -1,8 +1,5 @@
 <main>
     <form>
-        <label for="coach.id"></label>
-        <input type="number" name="coach.id" id="coach.id" [(ngModel)]="coach.id">
-
         <label for="coach.firstName"></label>
         <input type="text" name="coach.firstName" id="coach.firstName" [(ngModel)]="coach.firstName">
 
@@ -18,9 +15,9 @@
             <option value="Head">Head</option>
             <option value="Assistant">Assistant</option>
         </select>
-
-        <p>{{coach.teamname}}</p>
     </form>
+
+    <span>{{coach.teamname}}</span>
 
     <button type="button" (click)="transferCoach()">Transfer</button>
     <button type="button" (click)="updateCoach()">Update</button>

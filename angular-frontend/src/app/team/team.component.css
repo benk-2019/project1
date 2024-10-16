@@ -1,5 +1,7 @@
 select{
-    width: 125px;
+    width: 131px;
+    height: 21.25px;
+    vertical-align: top;
 }
 form{
     display:inline-block;

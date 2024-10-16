@@ -1,5 +1,6 @@
 input{
     width: 100px;
+    height: 18px;
 }
 
 form{
@@ -7,17 +8,19 @@ form{
 }
 
 select{
-    width:108px;
-    height:22px;
+    width:107.75px;
+    height:23.25px;
+    vertical-align: top;
 }
 
-p{
+span{
     padding:0px;
     margin:0px;
-    height:20px;
+    height:21.5px;
     border-style: solid;
-    border-width: 1px;
+    border-width: .25px;
     font-size: 15px;
     display: inline-block;
-    width: 108px;
+    width: 104.5px;
+    vertical-align: top;
 }

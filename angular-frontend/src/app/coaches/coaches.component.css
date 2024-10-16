@@ -4,8 +4,8 @@ pre{
     border: solid;
     border-width: 1px;
     margin:0px;
-    width: 641.5px;
-    font-size: 15px;
+    width: 539.5px;
+    font-size: 16px;
 }
 
 a{
@@ -24,4 +24,13 @@ a:hover{
     border: 2px;
     border-style: solid;
     border-color: black;
+}
+
+form>label{
+    width: 105.5px;
+    height: 17.75px;
+    display: inline-block;
+    border: solid;
+    border-width: .5px;
+    text-align: center;
 }

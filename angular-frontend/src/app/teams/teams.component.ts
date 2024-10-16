@@ -48,11 +48,30 @@ export class TeamsComponent {
   setTeamList(){
     let temp_tList: TeamSimple[] = []
     for(let team of this.teams){
-      if(temp_tList.indexOf({id:team.id,teamName:team.teamName}) === -1){
+      if(temp_tList.indexOf({id:team.id,teamName:team.teamName}) === -1){//not sure this is necessary anymore
         temp_tList.push({id:team.id,teamName:team.teamName});
       }
     }
     console.log(temp_tList);
     this.teamListService.setTeamList(temp_tList);
+  }
+
+  resetTeam(){
+    this.getAllTeams();
+  }
+
+  deleteTeam(index:number){
+    let team:TeamCoachPlayer = this.teams[index];
+    let temp_team:TeamCoachPlayer[] = [];
+    for(let i=0; i<this.teams.length; i++){
+      if(i !== index){
+        temp_team.push(this.teams[i]);
+      }
+    }
+    this.teams = temp_team;
+    this.setTeamList();
+    this.httpService.deleteTeam(team.id).subscribe(data=>{
+      console.log(data);
+    }); 
   }
 }

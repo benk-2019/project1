@@ -15,3 +15,12 @@ a:hover{
     border-style: solid;
     border-color: black;
 }
+
+form>label{
+    width: 105.5px;
+    height: 17.75px;
+    display: inline-block;
+    border: solid;
+    border-width: .5px;
+    text-align: center;
+}

@@ -1,18 +1,26 @@
 <main>
     <label for="teamSelected"></label>
     <select name="teamSelected" id="teamSelected" [(ngModel)]="teamSelected">
-        <option value="" selected="selected">teams...</option>
+        <option value="" selected="selected">Teams...</option>
         @for(team of teamNames; track $index){
             <option value={{team}}>{{team}}</option>
         }
     </select>
-    <pre>             ID              |   First Name     |    Last Name     |           Age            |          Role            |          Team</pre>
+    <!-- <pre>    First Name   |    Last Name    |          Age           |          Role          |        Team</pre> -->
+    <form>
+        <label for="firstName">First Name</label>
+        <label for="lastName">Last Name</label>
+        <label for="age">Age</label>
+        <label for="role">Role</label>
+        <label for="team">Team</label>
+    </form>
     <div>
         @for(coach of coaches; track $index){
             @if(coach.teamname === teamSelected){
                 <app-coach [coach]="coach"
                             (updateCoachEvent)="updateCoach($event, $index)"
-                            (deleteCoachEvent)="deleteCoach($event, $index)"></app-coach>
+                            (deleteCoachEvent)="deleteCoach($index)"
+                            (resetCoachEvent)="resetCoach()"></app-coach>
             }
         }
     </div>

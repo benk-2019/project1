@@ -1,34 +1,40 @@
 <main>
-    <form>
-        <label for="player.firstName">First Name: </label>
-        <input type="text" name="player.firstName" id="player.firstName" [(ngModel)]="player.firstName">
+    <div class="center">Create New Player:</div>
 
-        <label for="player.lastName">Last Name: </label>
-        <input type="text" name="player.lastName" id="player.lastName" [(ngModel)]="player.lastName">
+    <div class="center1">
+        <form>
+            <label for="player.firstName">First Name: </label>
+            <input type="text" name="player.firstName" id="player.firstName" [(ngModel)]="player.firstName">
 
-        <label for="player.age">Age: </label>
-        <input type="number" name="player.age" id="player.age" [(ngModel)]="player.age">
+            <label for="player.lastName">Last Name: </label>
+            <input type="text" name="player.lastName" id="player.lastName" [(ngModel)]="player.lastName">
 
-        <label for="player.position">Position: </label>
-        <select name="player.position" id="player.position" [(ngModel)]="player.position">
-            <option value="" selected="selected">Positions...</option>
-            <option value="Center">Center</option>
-            <option value="Right Wing">Right Wing</option>
-            <option value="Left Wing">Left Wing</option>
-            <option value="Right Defenseman">Right Defenseman</option>
-            <option value="Left Defenseman">Left Defenseman</option>
-            <option value="Goalie">Goalie</option>
-        </select>
+            <label for="player.age">Age: </label>
+            <input type="number" name="player.age" id="player.age" [(ngModel)]="player.age">
 
-        <label for="player.teamname">Team: </label>
-        <select name="player.teamname" id="player.teamname" [(ngModel)]="player.teamname">
-            <option value="" selected="selected">Team...</option>
-            @for(team of teamList; track $index){
-                <option value="{{team.teamName}}">{{team.teamName}}</option>
-            }
-        </select>
-    </form>
+            <label for="player.position">Position: </label>
+            <select name="player.position" id="player.position" [(ngModel)]="player.position">
+                <option value="" selected="selected">Positions...</option>
+                <option value="Center">Center</option>
+                <option value="Right Wing">Right Wing</option>
+                <option value="Left Wing">Left Wing</option>
+                <option value="Right Defenseman">Right Defenseman</option>
+                <option value="Left Defenseman">Left Defenseman</option>
+                <option value="Goalie">Goalie</option>
+            </select>
 
-    <button type="button" (click)="createPlayer()">Create</button>
+            <label for="player.teamname">Team: </label>
+            <select name="player.teamname" id="player.teamname" [(ngModel)]="player.teamname">
+                <option value="" selected="selected">Team...</option>
+                @for(team of teamList; track $index){
+                    <option value="{{team.teamName}}">{{team.teamName}}</option>
+                }
+            </select>
+        </form>
+    </div>
+
+    <div class="center2">
+        <button type="button" (click)="createPlayer()">Create</button>
+    </div>
 
 </main>

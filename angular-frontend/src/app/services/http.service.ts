@@ -44,6 +44,10 @@ export class HttpService {
     })
   }
 
+  deleteTeam(id:number): Observable<HttpResponse<String>>{
+    return this.http.delete<HttpResponse<String>>(this.baseURL + '/teams', {body:{id:id}});
+  }
+
 
 
   getAllPlayers(): Observable<HttpResponse<Player[]>>{
@@ -113,7 +117,11 @@ export class HttpService {
     });
   }
 
-  deleteCoach(id:number): Observable<HttpResponse<String>>{
-    return this.http.delete<HttpResponse<String>>(this.baseURL + '/coaches', {body:{id:id}});
+  deleteCoach(coach:Coach): Observable<HttpResponse<String>>{
+    return this.http.delete<HttpResponse<String>>(this.baseURL + '/coaches', {body:{
+      id:coach.id,
+      teamId:coach.teamId,
+      role:coach.role
+    }});
   }
 }

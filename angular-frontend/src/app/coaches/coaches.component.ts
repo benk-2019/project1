@@ -25,7 +25,7 @@ export class CoachesComponent {
   teamList(){
     let teams: string[] = [];
     for(let coach of this.coaches){
-      if(teams.indexOf(coach.teamname) === -1){
+      if((teams.indexOf(coach.teamname) === -1) && coach.teamname){
         teams.push(coach.teamname);
       }
     }
@@ -47,8 +47,8 @@ export class CoachesComponent {
     })
   }
 
-  deleteCoach(id: number, index: number){
-    console.log("Delete " + index);
+  deleteCoach(index: number){
+    let coach: Coach = this.coaches[index];
     let coaches_new : Coach[] = [];
     for(let i = 0; i<this.coaches.length; i++){
       if(i !== index){
@@ -58,8 +58,12 @@ export class CoachesComponent {
 
     this.coaches=coaches_new;
 
-    this.httpService.deleteCoach(id).subscribe(data=>{
+    this.httpService.deleteCoach(coach).subscribe(data=>{
       console.log(data);
     })
+  }
+
+  resetCoach(){
+    this.getAllCoaches();
   }
 }

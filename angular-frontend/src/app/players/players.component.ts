@@ -19,14 +19,11 @@ export class PlayersComponent {
   players: Player[] = [];
 
   teamSelected: string = '';
-  teamList: TeamSimple[] = [];
+  teamNames: string[] = [];
 
-  constructor(private httpService: HttpService, private teamListService: TeamListService){
+  constructor(private httpService: HttpService){
     this.getAllPlayers();
     console.log("In Players Constructor!!!");
-    this.teamListService.teamList.subscribe(data=>{
-      this.teamList = data;
-    });
   }
 
   getAllPlayers(){
@@ -36,8 +33,19 @@ export class PlayersComponent {
       console.log(data.body);
       this.players = temp_players;
       console.log(this.players);
+      this.teamList();
     });
   };
+
+  teamList(){
+    let teams: string[] = [];
+    for(let player of this.players){
+      if((teams.indexOf(player.teamname) === -1) && player.teamname){
+        teams.push(player.teamname);
+      }
+    }
+    this.teamNames = teams;
+  }
 
   updatePlayer(index:number, player:Player){
     let new_player = player;
