@@ -16,7 +16,6 @@ export class RedirectComponent {
   }
 
   redirect(){
-    console.log("Shid");
     this.router.navigate(['/teams']);
   }
 }
