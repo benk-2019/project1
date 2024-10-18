@@ -17,3 +17,25 @@ span{
     width: 104.5px;
     vertical-align: top;
 }
+
+select{
+    width:107.75px;
+    height:23.25px;
+    vertical-align: top;
+}
+
+.errorMessage1{
+    display: none;
+    border:0px;
+    margin:2px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.showError:hover + .errorMessage1{
+    display: flex;
+    position: absolute;
+    left:80%;
+    top:20%;
+    color:red;
+}

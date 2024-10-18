@@ -21,11 +21,12 @@ export class PlayerComponent {
   teamList: TeamSimple[] = [];
 
   constructor(private teamListService:TeamListService, private route:Router, private playerService: PlayerService){
-    this.teamListService.teamList.subscribe(data=>{
+    this.teamListService.teamList.subscribe(data=>{//get list of avaiblable teams
       this.teamList = data;
     })
   }
 
+  //emit events for crud operations to alert parent to reach out to backend
   @Output() updatePlayerEvent = new EventEmitter<Player>();
   @Output() deletePlayerEvent = new EventEmitter<void>();
   @Output() resetPlayerEvent = new EventEmitter<void>();
@@ -42,6 +43,7 @@ export class PlayerComponent {
     this.resetPlayerEvent.emit();
   }
 
+  //store player we want to swap to another team in service so we can use it when we navigate to other page
   transferPlayer(){
     this.playerService.setplayer_s(this.player);
     this.route.navigate(['players/transfer_player']);

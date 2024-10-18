@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Coach } from '../models/coach';
 
+//List simple coach data and emits remove event to remove coach from selection
 @Component({
   selector: 'app-rm-coach',
   standalone: true,

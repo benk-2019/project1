@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Player } from '../models/player';
 
+//List simple player data and emits remove event to remove player from selection
 @Component({
   selector: 'app-rm-player',
   standalone: true,

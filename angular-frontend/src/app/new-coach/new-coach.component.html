@@ -1,43 +1,61 @@
 <main>
-    <div class="center">Create New Coach:</div>
-    <div class="center1">
-        <form>
-            <label for="new_coach.firstName">First Name:</label>
-            <input type="text" name="new_coach.firstName" id="new_coach.firstName" [(ngModel)]="new_coach.firstName">
+    <div class="flexboxy">
+        <div class="left">
+            <img src="https://i.etsystatic.com/10919371/r/il/dd2704/1537413889/il_794xN.1537413889_6upn.jpg" alt="clipboard">
+        </div>
 
-            <label for="new_coach.lastName">Last Name:</label>
-            <input type="text" name="new_coach.lastName" id="new_coach.lastName" [(ngModel)]="new_coach.lastName">
+        <div class="center1">
+            <div class="center">Create New Coach:</div>
+            <form>
+                <label for="new_coach.firstName">First Name:</label>
+                <input type="text" name="new_coach.firstName" id="new_coach.firstName" [(ngModel)]="new_coach.firstName">
 
-            <label for="new_coach.age">Age:</label>
-            <input type="text" name="new_coach.age" id="new_coach.age" [(ngModel)]="new_coach.age">
+                <label for="new_coach.lastName">Last Name:</label>
+                <input type="text" name="new_coach.lastName" id="new_coach.lastName" [(ngModel)]="new_coach.lastName">
 
-            <label for="new_coach.teamname">Team:</label>
-            <select name="new_coach.teamname" id="new_coach.teamname" (change)="headCheck()" [(ngModel)]="new_coach.teamname">
-                <option value="" selected="selected">teams...</option>
-                @for(team of teamList; track $index){
-                    <option value={{team.teamName}}>{{team.teamName}}</option>
-                }
-            </select>
-            @if(roleSelect){
-                <label for="new_coach.role">Role:</label>
-                <select name="new_coach.role" id="new_coach.role" [(ngModel)]="new_coach.role">
-                    <option value="" selected="selected">roles...</option>
-                    <option value="Head">Head</option>
-                    <option value="Assistant">Assistant</option>
+                <label for="new_coach.age">Age:</label>
+                <input type="text" name="new_coach.age" id="new_coach.age" [(ngModel)]="new_coach.age">
+
+                <label for="new_coach.teamname">Team:</label>
+                <select name="new_coach.teamname" id="new_coach.teamname" (change)="headCheck()" [(ngModel)]="new_coach.teamname">
+                    <option value="" selected="selected">teams...</option>
+                    @for(team of teamList; track $index){
+                        <option value={{team.teamName}}>{{team.teamName}}</option>
+                    }
                 </select>
-            }
-            @else{
-                <label for="new_coach.role">Role:</label>
-                @if(new_coach.role){
-                    <p>Head</p>
+                @if(roleSelect){
+                    <label for="new_coach.role">Role:</label>
+                    <select name="new_coach.role" id="new_coach.role" [(ngModel)]="new_coach.role">
+                        <option value="" selected="selected">roles...</option>
+                        <option value="Head">Head</option>
+                        <option value="Assistant">Assistant</option>
+                    </select>
                 }
                 @else{
-                    <p></p>
+                    <label for="new_coach.role">Role:</label>
+                    @if(new_coach.role){
+                        <p class="normal">Head</p>
+                        <p class="errorMsg1">*This team doesn't have any coaches, this one must be Head Coach!</p>
+                    }
+                    @else{
+                        <p class="normal"></p>
+                        <p class="errorMsg1">*No team selected, so coach can't have a role!</p>
+                    }
                 }
-            }
-        </form>
+            </form>
+        </div>
+
+        <div class="right">
+            <img src="https://i.etsystatic.com/10919371/r/il/dd2704/1537413889/il_794xN.1537413889_6upn.jpg" alt="clipboard">
+        </div>
     </div>
-    <div class="center2">
-        <button (click)="createCoach()">Submit</button>
+
+    <div class="buttonBlock">
+        <button (click)="createCoach()">Create</button>
+        <button (click)="resetPage()">Reset</button>
     </div>
+
+    @if(errorCreate){
+        <p class="error">*A Coach with this name already exists!</p>
+    }
 </main>

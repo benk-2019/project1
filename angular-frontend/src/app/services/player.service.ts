@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Player } from '../models/player';
 import { BehaviorSubject } from 'rxjs';
 
+//We want access to player we want to swap after changing pages, so store here
 @Injectable({
   providedIn: 'root'
 })

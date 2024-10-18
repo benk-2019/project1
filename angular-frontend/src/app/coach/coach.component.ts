@@ -21,16 +21,13 @@ export class CoachComponent {
   // coach_copy: Coach = new Coach(0, '', '', 0, '', 0, '');
   teamList: TeamSimple[] = [];
 
-  // ngOnInit(){
-  //   this.coach_copy = this.coach;
-  // }
-
   constructor(private teamListService:TeamListService, private coachService:CoachService, private router:Router){
-    this.teamListService.teamList.subscribe(data=>{
+    this.teamListService.teamList.subscribe(data=>{//get list of available teams
       this.teamList = data;
     });
   }
 
+  //output event notifying parent of crud operations to perform
   @Output() updateCoachEvent = new EventEmitter<Coach>();
   @Output() deleteCoachEvent = new EventEmitter<number>();
   @Output() resetCoachEvent = new EventEmitter<void>();
@@ -46,7 +43,7 @@ export class CoachComponent {
     this.resetCoachEvent.emit();
   }
 
-
+  //store coach to swap before navigating to new page
   transferCoach(){
     this.coachService.setCoach_s(this.coach);
     this.router.navigate(['coaches/transfer_coach']);

@@ -21,6 +21,51 @@ span{
     border-width: .25px;
     font-size: 15px;
     display: inline-block;
-    width: 104.5px;
+    width: 106px;
     vertical-align: top;
+}
+
+.showError{
+    padding:0px;
+    margin:0px;
+    height:21.5px;
+    border-style: solid;
+    border-width: .25px;
+    font-size: 15px;
+    display: inline-block;
+    width: 106px;
+    vertical-align: top;
+}
+
+.errorMessage1{
+    display: none;
+    border:0px;
+    margin:2px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.showError:hover + .errorMessage1{
+    display: flex;
+    position: absolute;
+    left:80%;
+    top:20%;
+    color:red;
+}
+
+
+.showError:hover + .errorMessage2{
+    display: flex;
+    position: absolute;
+    left:80%;
+    top:20%;
+    color:red;
+}
+
+.errorMessage2{
+    display: none;
+    border:0px;
+    margin:2px;
+    font-size: 18px;
+    font-weight: bold;
 }

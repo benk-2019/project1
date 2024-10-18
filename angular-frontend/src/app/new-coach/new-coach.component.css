@@ -13,23 +13,18 @@ select{
     display:flex;
     justify-content: center;
     align-items: center;
-}
-
-.center2{
-    margin-top: 5px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    margin: 0% 10%;
 }
 
 .center{
-    text-align: center;
+    display: block;
     margin-bottom: 15px;
     font-size: 24px;
     font-weight: bold;
 }
 
-p{
+.normal{
     padding:0px;
     margin:0px;
     height:20px;
@@ -39,4 +34,53 @@ p{
     display: block;
     width: 158px;
 
+}
+
+.flexboxy{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+img{
+    max-width: 100%;
+    max-height: 100%;
+ }
+ 
+ .left, .right{
+     width: 20%;
+ }
+ 
+ .buttonBlock{
+    display: block;
+    margin: auto;
+    margin-bottom: 200px;
+}
+
+.buttonBlock>button{
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+}
+
+.error{
+    font-size: 18px;
+    font-weight: bold;
+    color:red;
+}
+
+.errorMsg1{
+    display:none;
+    border:0px;
+    margin:2px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.normal:hover + .errorMsg1{
+    display: flex;
+    position: absolute;
+    left:41%;
+    top:65%;
+    color:red;
 }

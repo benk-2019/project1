@@ -3,31 +3,63 @@ article{
     justify-content: space-between;
 }
 
-.left, .right{
-    display: inline-block;
-    border-style: solid;
-    width: 40%;
-    height:300px;
+main{
+    display:flex;
+    flex-direction: column;
+}
+
+.buttonBlock{
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.buttonBlock>button{
+    display: block;
+    margin: auto;
+    margin-top: 5px;
 }
 
 .left{
     background-color: rgb(159, 194, 224);
+    border-style: solid;
+    width: 40%;
+    height:300px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .right{
     background-color: rgb(200, 131, 131);
-    justify-content: right;
+    border-style: solid;
+    width: 40%;
+    height:300px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
-.right>.ah{
-    
-    margin: 1em 0em;
+.sudoP>select{
+    margin-top: 3px;
 }
 
-button{
-    position: relative;
-    top: 55%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+.staticSection{
+    margin: 25px 0px 8px 0px;
+    font-size: 18px;
+}
+
+p{
+    margin:3px 0px 0px 0px;
+}
+
+.title{
+    font-size:20px;
+    font-weight: bold;
+    margin-bottom:2px;
+}
+
+.subtitle{
+    font-size: 18px;
+    margin-top: 25px;
 }

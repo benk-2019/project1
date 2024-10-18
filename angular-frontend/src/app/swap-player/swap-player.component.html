@@ -1,7 +1,14 @@
 <main>
     <article>
-        <section class="left">
-            <p>Current Team: {{player.teamname}}</p>
+        <div class="left">
+            <p class="title">Current Team:</p>
+            @if(player.teamname){
+                <p>{{player.teamname}}</p>
+            }
+            @else{
+                <p>NA</p>
+            }
+            <p class="subtitle">Old Team's Current Composition:</p>
             <form>
                 <label for="oldTeam.players"></label>
                 <select name="oldTeam.players" id="oldTeam.players">
@@ -19,16 +26,17 @@
                     }
                 </select>
             </form>
-            <p>Player to Transfer: </p>
+            <p class="staticSection">Player to Transfer: </p>
             <p>Name: {{player.firstName}} {{player.lastName}}</p>
             <p>Age: {{player.age}}</p>
             <p>Position: {{player.position}}</p>
-        </section>
+        </div>
 
 
-        <section class="right">
-            <form class="ah">
-                <label for="selectedTeam.teamName">New Team: </label>
+        <div class="right">
+            <p class="title">New Team: </p>
+            <form class="sudoP">
+                <label for="selectedTeam.teamName"></label>
                 <select name="selectedTeam.teamName" id="selectedTeam.teamName" [(ngModel)]="selectedTeam.teamName" (change)="getNewTeam()">
                     <option value="" selected="selected">Teams...</option>
                     @for(team of teamList; track $index){
@@ -39,6 +47,7 @@
                 </select>
             </form>
 
+            <p class="subtitle">New Team's Current Composition:</p>
             <form>
                 <label for="newTeam.players"></label>
                 <select name="newTeam.players" id="newTeam.players">
@@ -56,13 +65,15 @@
                     }
                 </select>
 
-                <p>Player Post Transfer: </p>
+                <p class="staticSection">Player Post Transfer: </p>
                 <p>Name: {{player.firstName}} {{player.lastName}}</p>
                 <p>Age: {{player.age}}</p>
                 <p>Position: {{player.position}}</p>
             </form>
-        </section>
+        </div>
     </article>
 
-    <button (click)="changeTeam()">Confirm Transfer</button>
+    <div class="buttonBlock">
+        <button (click)="changeTeam()">Confirm Transfer</button>
+    </div>
 </main>

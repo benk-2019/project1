@@ -24,5 +24,12 @@
         }
     </div>
     <a routerLink="new_player"> Add Player </a>
+
+    @if(updateError1){
+        <p class="error">*Couldn't find player in db, contact IT support</p>
+    }
+    @if(updateError2){
+        <p class="error">*You can't change this players name to one that already exists</p>
+    }
 </main>
 

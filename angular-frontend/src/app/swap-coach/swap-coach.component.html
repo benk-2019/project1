@@ -1,7 +1,14 @@
 <main>
     <article>
-        <section class="left">
-            <p>Current Team: {{coach1.teamname}}</p>
+        <div class="left">
+            <p class="title">Current Team:</p>
+            @if(coach1.teamname){
+                <p>{{coach1.teamname}}</p>
+            }
+            @else{
+                <p>NA</p>
+            }
+            <p class="subtitle">Old Team's Current Composition:</p>
             <form>
                 <label for="oldTeam.players"></label>
                 <select name="oldTeam.players" id="oldTeam.players">
@@ -19,16 +26,17 @@
                     }
                 </select>
             </form>
-            <p>Coach to Transfer: </p>
+            <p class="staticSection">Coach to Transfer: </p>
             <p>Name: {{coach1.firstName}} {{coach1.lastName}}</p>
             <p>Age: {{coach1.age}}</p>
             <p>Role In Current Team: {{coach1.role?coach1.role:'NA'}}</p>
-        </section>
+        </div>
 
 
-        <section class="right">
-            <form class="ah">
-                <label for="selectedTeam.teamName">New Team: </label>
+        <div class="right">
+            <p class="title">New Team: </p>
+            <form class="sudoP">
+                <label for="selectedTeam.teamName"></label>
                 <select name="selectedTeam.teamName" id="selectedTeam.teamName" [(ngModel)]="selectedTeam.teamName" (change)="getNewTeam()">
                     <option value="" selected="selected">Teams...</option>
                     @for(team of teamList; track $index){
@@ -39,6 +47,7 @@
                 </select>
             </form>
 
+            <p class="subtitle">New Team's Current Composition:</p>
             <form>
                 <label for="newTeam.players"></label>
                 <select name="newTeam.players" id="newTeam.players">
@@ -56,13 +65,15 @@
                     }
                 </select>
 
-                <p>Coach Post Transfer: </p>
+                <p class="staticSection">Coach Post Transfer: </p>
                 <p>Name: {{coach1.firstName}} {{coach1.lastName}}</p>
                 <p>Age: {{coach1.age}}</p>
                 <p>Role In New Team: {{newTeam.teamName?newTeam.headCoach?"Assistant":'Head':'NA'}}</p>
             </form>
-        </section>
+        </div>
     </article>
 
-    <button (click)="changeTeam()">Confirm Transfer</button>
+    <div class="buttonBlock">
+        <button (click)="changeTeam()">Confirm Transfer</button>
+    </div>
 </main>

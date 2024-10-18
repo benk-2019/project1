@@ -1,17 +1,19 @@
 <Main>
     <Form>
-        <label for="team.teamName">Team Name: </label>
-        <input type="text" name="team.teamName" id="team.teamName" [(ngModel)]="team.teamName">
+        <div class="center">
+            <label for="team.teamName">Team Name: </label>
+            <input type="text" name="team.teamName" id="team.teamName" [(ngModel)]="team.teamName">
 
-        <label for="team.headCoach">Head Coach: </label>
-        <select name="team.headCoach" id="team.headCoach" [(ngModel)]="team.headCoach">
-            <option value="{{team.headCoach}}">{{team.headCoach}}</option>
-            @for(coach of team.coaches; track $index){
-                <option value="{{coach.firstName}} {{coach.lastName}}">{{coach.firstName}} {{coach.lastName}}</option>
-            }
-        </select>
-
-        <p>Number of Players: {{team.numPlayers}}</p>
+            <label for="team.headCoach">Head Coach: </label>
+            <select name="team.headCoach" id="team.headCoach" [(ngModel)]="team.headCoach">
+                <option value="{{team.headCoach}}">{{team.headCoach}}</option>
+                @for(coach of team.coaches; track $index){
+                    <option value="{{coach.firstName}} {{coach.lastName}}">{{coach.firstName}} {{coach.lastName}}</option>
+                }
+            </select>
+            <p>Number of Players: {{team.numPlayers}}</p>
+        </div>
+        
         <div class="top">
             <div class="left">
                 <p>Assigned Coaches:</p>
@@ -54,5 +56,13 @@
             </div>
         </div>
     </Form>
-    <button type="button" (click)="createTeam()">Create</button>
+
+    <div class="buttonBlock">
+        <button type="button" (click)="createTeam()">Create</button>
+        <button (click)="resetPage()">Reset</button>
+    </div>
+
+    @if(createError){
+        <p class="error">*A Team with this name already exists!!!</p>
+    }
 </Main>

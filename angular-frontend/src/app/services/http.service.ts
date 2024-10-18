@@ -10,7 +10,7 @@ import { Coach } from '../models/coach';
   providedIn: 'root'
 })
 export class HttpService {
-
+  //Basic http requests with custom bodies to fit the backends expectations
   constructor(private http: HttpClient) { }
   
   baseURL: string = "http://localhost:3031";
@@ -59,7 +59,6 @@ export class HttpService {
   }
 
   updatePlayer(diff_player:Player): Observable<HttpResponse<String>>{
-    console.log(diff_player.teamId);
     return this.http.put<HttpResponse<String>>(this.baseURL + '/players', {
       id:diff_player.id,
       firstName:diff_player.firstName, 

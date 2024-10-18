@@ -18,22 +18,11 @@ export class TeamComponent {
   constructor(){
   }
 
+  //emit events to notify parent to perform crud operations
   @Output() updateTeamEvent = new EventEmitter<TeamCoachPlayer>();
   @Output() deleteTeamEvent = new EventEmitter<void>();
   @Output() resetTeamEvent = new EventEmitter<void>();
   updateTeam() : void{
-    // let flag:boolean = false;
-
-    // for(let coach of this.team.coaches){
-    //   if(this.team.headCoach === (coach.firstName + " " + coach.lastName)){
-    //     flag = true;
-    //     break;
-    //   }
-    // }
-
-    // if((flag) || (this.team.headCoach === '')){
-    //   this.updateTeamEvent.emit(this.team);
-    // }
     this.updateTeamEvent.emit(this.team);
   }
 
@@ -41,7 +30,7 @@ export class TeamComponent {
     this.deleteTeamEvent.emit();
   }
 
-  resetTeam():void{//not sure how to do this, will come back later
+  resetTeam():void{
     this.resetTeamEvent.emit();
   }
 }

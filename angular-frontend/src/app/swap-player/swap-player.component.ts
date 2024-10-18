@@ -23,15 +23,15 @@ export class SwapPlayerComponent {
   newTeam: TeamCoachPlayer = new TeamCoachPlayer(0,'',0,'',[],[]);
 
   constructor(private httpService:HttpService, private teamListService:TeamListService, private playerService:PlayerService, private router:Router){
-    this.teamListService.teamList.subscribe(data=>{
+    this.teamListService.teamList.subscribe(data=>{//get list of teams
       this.teamList = data;
     });
-    this.playerService.player_s.subscribe(data=>{
+    this.playerService.player_s.subscribe(data=>{//get the player we are planning to swap
       this.player = data;
     });
   }
 
-  changeTeam(){
+  changeTeam(){//set up player with variables we hid from user to enable funtionalities
     this.player.teamId = this.selectedTeam.id;
     this.player.teamname = this.selectedTeam.teamName;
     this.httpService.updatePlayer(this.player).subscribe(data=>{
@@ -41,14 +41,14 @@ export class SwapPlayerComponent {
   }
 
   getNewTeam(){
-    if(this.selectedTeam.teamName !== ''){
-      for(let team of this.teamList){
+    if(this.selectedTeam.teamName !== ''){//if team name empty then no team selected
+      for(let team of this.teamList){//find id in teamList, so we can use it later
         if(this.selectedTeam.teamName === team.teamName){
           this.selectedTeam.id = team.id;
           break;
         }
       }
-      this.httpService.getTeamById(this.selectedTeam.id).subscribe(data=>{
+      this.httpService.getTeamById(this.selectedTeam.id).subscribe(data=>{//if we get result set it, else don't have team
         this.newTeam = (data.body)?data.body:(new TeamCoachPlayer(0,'',0,'',[],[]));
       });
     }

@@ -9,15 +9,28 @@
         <label for="coach.age"></label>
         <input type="number" name="coach.age" id="coach.age" [(ngModel)]="coach.age">
 
-        <label for="coach.role"></label>
-        <select name="coach.role" id="coach.role" [(ngModel)]="coach.role">
-            <option value="" selected="selected">roles...</option>
-            <option value="Head">Head</option>
-            <option value="Assistant">Assistant</option>
-        </select>
+        @if(coach.role !== "Assistant"){
+            @if(coach.role === "Head"){
+                <p class="showError">Head</p>
+                <p class="errorMessage1">*To ensure always one Head coach, can only change role from Assistant to Head</p>
+            }
+            @else{
+                <p class="showError">No Role</p>
+                <p class="errorMessage1">*To ensure always one Head coach, can only change role from Assistant to Head</p>
+            }
+        }
+        @else{
+            <label for="coach.role"></label>
+            <select name="coach.role" id="coach.role" [(ngModel)]="coach.role">
+                <option value="" selected="selected">roles...</option>
+                <option value="Head">Head</option>
+                <option value="Assistant">Assistant</option>
+            </select>
+        }
     </form>
 
-    <span>{{coach.teamname}}</span>
+    <span class="showError">{{coach.teamname}}</span>
+    <p class="errorMessage2">*To change Team must select transfer</p>
 
     <button type="button" (click)="transferCoach()">Transfer</button>
     <button type="button" (click)="updateCoach()">Update</button>

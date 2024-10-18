@@ -18,9 +18,10 @@ export class NewCoachComponent {
   existing_coaches: Coach[] = [];
   teamList: TeamSimple[] = [];
   roleSelect:boolean = false;
+  errorCreate:boolean = false;
 
   constructor(private httpService: HttpService, private teamListService:TeamListService, private router: Router){
-    this.teamListService.teamList.subscribe(data=>{
+    this.teamListService.teamList.subscribe(data=>{//get list of teams
       this.teamList = data;
     });
     this.getAllCoaches();
@@ -33,21 +34,25 @@ export class NewCoachComponent {
     });
   }
 
-  createCoach(){
-    let flag = false;
+  createCoach(){//find team id, then create coach in back end, handle error if coach with same name already exists
+    this.errorCreate = false;
     for(let team of this.teamList){
       if(this.new_coach.teamname === team.teamName){
         this.new_coach.teamId = team.id;
       }
     }
-    console.log(this.new_coach)
     this.httpService.createCoach(this.new_coach).subscribe(data=>{
       console.log(data);
       this.router.navigate(['/coaches']);
+    }, error=>{
+      console.error(error);
+      if(error.status === 400){
+        this.errorCreate = true;
+      }
     });
   }
 
-  headCheck(){
+  headCheck(){//decide what user is allowed to select in terms of coaches role
     if(this.new_coach.teamname){//if have team selected
       //if find head, then admin can choose role else has to be assigned head
       let flag = false;
@@ -73,4 +78,8 @@ export class NewCoachComponent {
     }
   }
 
+  resetPage(){//just reset coach and error flags to reset page
+    this.new_coach = new Coach(0, '', '', 0, '', 0, '');
+    this.errorCreate = false;
+  }
 }

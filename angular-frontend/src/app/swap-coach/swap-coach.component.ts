@@ -24,11 +24,11 @@ export class SwapCoachComponent {
   newTeam: TeamCoachPlayer = new TeamCoachPlayer(0,'',0,'',[],[]);
 
   constructor(private httpService:HttpService, private teamListService:TeamListService, private coachService:CoachService, private router:Router){
-    this.teamListService.teamList.subscribe(data=>{
+    this.teamListService.teamList.subscribe(data=>{//get list of teams
       this.teamList = data;
       console.log(data);
     });
-    this.coachService.coach_s.subscribe(data=>{
+    this.coachService.coach_s.subscribe(data=>{//get coach we are swapping
       this.coach1 = data;
     });
   }
@@ -36,6 +36,9 @@ export class SwapCoachComponent {
   changeTeam(){
     this.coach1.teamId = this.selectedTeam.id;
     this.coach1.teamname = this.selectedTeam.teamName;
+    //force role to head if no head on this team
+    //force role to empty if no team selected
+    //force assistant role if already have head
     if(this.newTeam.headCoach && this.newTeam.teamName){
       this.coach1.role = 'Assistant';
     }
@@ -52,7 +55,7 @@ export class SwapCoachComponent {
   }
 
   getNewTeam(){
-    for(let team of this.teamList){
+    for(let team of this.teamList){//find team id in team list
       if(this.selectedTeam.teamName === team.teamName){
         this.selectedTeam.id = team.id;
         break;

@@ -17,12 +17,14 @@ export class CoachesComponent {
 
   teamSelected: string = '';
   teamNames: string[] = [];
+  updateError1 = false;
+  updateError2 = false;
 
   constructor(private httpService: HttpService){
     this.getAllCoaches();
   }
 
-  teamList(){
+  teamList(){//only list teams that have coaches on them
     let teams: string[] = [];
     for(let coach of this.coaches){
       if((teams.indexOf(coach.teamname) === -1) && coach.teamname){
@@ -32,7 +34,7 @@ export class CoachesComponent {
     this.teamNames = teams;
   }
 
-  getAllCoaches(){
+  getAllCoaches(){//get all coaches
     this.httpService.getAllCoaches().subscribe(data=>{
       this.coaches = (data.body)?data.body:[];
       console.log(this.coaches);
@@ -40,17 +42,29 @@ export class CoachesComponent {
     })
   }
 
-  updateCoach(coach_change: Coach, index: number){
+  //handle error if happens, otherwise just console log result of update
+  updateCoach(coach_change: Coach, index: number){//update coach
+    this.updateError1 = false;
+    this.updateError2 = false;
     this.coaches[index] = coach_change;
     this.httpService.updateCoach(coach_change).subscribe(data=>{
       console.log(data);
-    })
+      this.getAllCoaches();
+    }, error=>{
+      console.error(error);
+      if(error.status === 404){//not found
+        this.updateError1 = true;
+      }
+      else if(error.status === 400){//name already exist in db
+        this.updateError2 = true;
+      }
+    });
   }
 
-  deleteCoach(index: number){
+  deleteCoach(index: number){//delete coach
     let coach: Coach = this.coaches[index];
     let coaches_new : Coach[] = [];
-    for(let i = 0; i<this.coaches.length; i++){
+    for(let i = 0; i<this.coaches.length; i++){//can just remove coach locally, don't need to do extra get operation
       if(i !== index){
         coaches_new.push(this.coaches[i]);
       }
@@ -63,7 +77,9 @@ export class CoachesComponent {
     })
   }
 
-  resetCoach(){
+  resetCoach(){//just need to get all coaches to reset page, also reset error flags
     this.getAllCoaches();
+    this.updateError1 = false;
+    this.updateError2 = false;
   }
 }

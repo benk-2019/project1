@@ -24,3 +24,9 @@ form>label{
     border-width: .5px;
     text-align: center;
 }
+
+.error{
+    font-size: 18px;
+    font-weight: bold;
+    color:red;
+}

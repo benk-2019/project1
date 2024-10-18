@@ -10,10 +10,19 @@
         <input type="number" name="player.age" id="player.age" [(ngModel)]="player.age">
 
         <label for="player.position"></label>
-        <input type="text" name="player.position" id="player.position" [(ngModel)]="player.position">
+            <select name="player.position" id="player.position" [(ngModel)]="player.position">
+                <option value="{{player.position}}" selected="selected">{{player.position}}</option>
+                <option value="Center">Center</option>
+                <option value="Right Wing">Right Wing</option>
+                <option value="Left Wing">Left Wing</option>
+                <option value="Right Defenseman">Right Defenseman</option>
+                <option value="Left Defenseman">Left Defenseman</option>
+                <option value="Goalie">Goalie</option>
+            </select>
     </form>
 
-    <span>{{player.teamname}}</span>
+    <span class="showError">{{player.teamname}}</span>
+    <p class="errorMessage1">*To change Team must select transfer</p>
    
     <button type="button" (click)="transferPlayer()">Transfer</button>
     <button type="button" (click)="updatePlayer()">Update</button>

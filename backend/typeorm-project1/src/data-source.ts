@@ -14,6 +14,6 @@ export const AppDataSource = new DataSource({
     password: process.env.PASSWORD_PG,
     database: "hockey",
     synchronize: true,
-    logging: true,
+    logging: false,
     entities: [Player, Team, Coach]
 })

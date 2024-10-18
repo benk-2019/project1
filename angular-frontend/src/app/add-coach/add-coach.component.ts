@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Coach } from '../models/coach';
 
+//just simple list of coach details, and emit event to include coach in selected
 @Component({
   selector: 'app-add-coach',
   standalone: true,
