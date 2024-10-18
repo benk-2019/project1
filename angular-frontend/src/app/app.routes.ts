@@ -7,8 +7,13 @@ import { NewPlayerComponent } from './new-player/new-player.component';
 import { NewCoachComponent } from './new-coach/new-coach.component';
 import { SwapPlayerComponent } from './swap-player/swap-player.component';
 import { SwapCoachComponent } from './swap-coach/swap-coach.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 export const routes: Routes = [
+    {
+        path:'',
+        component: RedirectComponent
+    },
     {
         path:"teams",
         component: TeamsComponent
